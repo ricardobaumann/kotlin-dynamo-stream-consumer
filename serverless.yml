@@ -1,0 +1,17 @@
+service: dynamo-consumer
+
+provider:
+  name: aws
+  runtime: java8
+  memorySize: 448
+  timeout: 300
+  region: eu-west-1
+
+package:
+  artifact: build/distributions/kotlin-dynamo-stream-consumer-1.0.zip
+
+functions:
+  compute:
+    handler: consumer.LambdaHandler
+    events:
+      - stream: arn:aws:dynamodb:eu-west-1:933782373565:table/table-name/stream/2017-09-21T09:30:18.727
